@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/item_bottom_navigation_one"
+        android:id="@+id/fragment_one"
         android:enabled="true"
-        android:title="ONE"/>
+        android:title="@string/title_one"/>
 
     <item
-        android:id="@+id/item_bottom_navigation_two"
+        android:id="@+id/fragment_two"
         android:enabled="true"
-        android:title="TWO"/>
+        android:title="@string/title_two"/>
 
     <item
-        android:id="@+id/item_bottom_navigation_three"
+        android:id="@+id/fragment_three"
         android:enabled="true"
-        android:title="THREE"/>
+        android:title="@string/title_three"/>
 
     <item
-        android:id="@+id/item_bottom_navigation_four"
+        android:id="@+id/fragment_four"
         android:enabled="true"
-        android:title="FOUR"/>
+        android:title="@string/title_four"/>
 
 </menu>
