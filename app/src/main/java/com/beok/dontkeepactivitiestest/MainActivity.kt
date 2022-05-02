@@ -5,32 +5,36 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.beok.dontkeepactivitiestest.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val oneFragment = OneFragment()
-    private val twoFragment = TwoFragment()
-    private val threeFragment = ThreeFragment()
-    private val fourFragment = FourFragment()
-
-    private var currentFragment: Fragment = oneFragment
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("beokbeok", "onCreate")
 
-        Log.d("beokbeok", "MainActivity is $this")
-        Log.d("beokbeok", "oneFragment is $oneFragment")
-        Log.d("beokbeok", "twoFragment is $twoFragment")
-        Log.d("beokbeok", "threeFragment is $threeFragment")
-        Log.d("beokbeok", "fourFragment is $fourFragment")
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setupBinding()
-        setupUI()
-        setupListener()
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.fragment_one, R.id.fragment_two, R.id.fragment_three, R.id.fragment_four
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
@@ -56,50 +60,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("beokbeok", "onDestroy")
-    }
-
-    private fun setupListener() {
-        binding.bnvMain.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.item_bottom_navigation_one -> showFragment(oneFragment)
-                R.id.item_bottom_navigation_two -> showFragment(twoFragment)
-                R.id.item_bottom_navigation_three -> showFragment(threeFragment)
-                R.id.item_bottom_navigation_four -> showFragment(fourFragment)
-            }
-            true
-        }
-    }
-
-    private fun showFragment(fragment: Fragment) {
-        supportFragmentManager
-            .beginTransaction()
-            .hide(currentFragment)
-            .show(fragment)
-            .commitAllowingStateLoss()
-        currentFragment = fragment
-    }
-
-    private fun setupUI() {
-        supportFragmentManager
-            .beginTransaction()
-            .run {
-                if (supportFragmentManager.findFragmentByTag(FourFragment.TAG) == null) {
-                    add(R.id.fl_main, fourFragment, FourFragment.TAG)
-                    hide(fourFragment)
-                }
-                if (supportFragmentManager.findFragmentByTag(ThreeFragment.TAG) == null) {
-                    add(R.id.fl_main, threeFragment, ThreeFragment.TAG)
-                    hide(threeFragment)
-                }
-                if (supportFragmentManager.findFragmentByTag(TwoFragment.TAG) == null) {
-                    add(R.id.fl_main, twoFragment, TwoFragment.TAG)
-                    hide(twoFragment)
-                }
-                if (supportFragmentManager.findFragmentByTag(OneFragment.TAG) == null) {
-                    add(R.id.fl_main, oneFragment, OneFragment.TAG)
-                }
-                commitAllowingStateLoss()
-            }
     }
 
     private fun setupBinding() {

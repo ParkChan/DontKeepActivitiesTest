@@ -18,6 +18,9 @@ class ThreeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentThreeBinding.inflate(layoutInflater)
+        binding.tvLight.setOnClickListener { ThemeUtil.applyTheme(ThemeType.LIGHT_MODE) }
+        binding.tvDark.setOnClickListener { ThemeUtil.applyTheme(ThemeType.DARK_MODE) }
+
         return binding.root
     }
 
