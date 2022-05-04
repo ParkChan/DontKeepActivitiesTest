@@ -63,10 +63,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun selectTab(itemId: Int) {
         when (itemId) {
-            R.id.item_bottom_navigation_one -> showFragment(oneFragment)
-            R.id.item_bottom_navigation_two -> showFragment(twoFragment)
-            R.id.item_bottom_navigation_three -> showFragment(threeFragment)
-            R.id.item_bottom_navigation_four -> showFragment(fourFragment)
+            R.id.fragment_one -> showFragment(oneFragment)
+            R.id.fragment_two -> showFragment(twoFragment)
+            R.id.fragment_three -> showFragment(threeFragment)
+            R.id.fragment_four -> showFragment(fourFragment)
         }
     }
 
